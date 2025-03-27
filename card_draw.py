@@ -1,7 +1,8 @@
-# Intentionally flawed Python program
+# Fixed Python program
 
 # importing modules
 import itertools
+import random  # Import the random module
 
 # make a deck of cards
 deck = list(itertools.product(range(1, 14), ['Spade', 'Heart', 'Diamond', 'Club']))

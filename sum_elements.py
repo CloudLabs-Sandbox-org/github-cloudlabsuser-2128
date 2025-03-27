@@ -1,37 +1,35 @@
-#A poorly written example of a program in Python. It prompts the user for the number of elements to sum, takes those integers as input, and handles some basic error cases
-
 MAX = 100
 
 def calculate_sum(arr):
-   result = 0
-   for num in arr:
-      result += num
-   return result
+    """Calculate the sum of a list of numbers."""
+    return sum(arr)
+
+def get_integer_input(prompt, error_message="Invalid input. Please enter a valid integer."):
+    """Prompt the user for an integer input with error handling."""
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print(error_message)
 
 def main():
-   try:
-      n = int(input("Enter the number of elements (1-100): "))
-      if not 1 <= n <= MAX:
-            print("Invalid input. Please provide a digit ranging from 1 to 100.")
-            exit(1)
+    try:
+        # Get the number of elements
+        n = get_integer_input("Enter the number of elements (1-100): ")
+        if not 1 <= n <= MAX:
+            print(f"Invalid input. Please provide a number between 1 and {MAX}.")
+            return
 
-      arr = []
+        # Get the list of integers
+        print(f"Enter {n} integers:")
+        arr = [get_integer_input(f"Element {_ + 1}: ") for _ in range(n)]
 
-      print(f"Enter {n} integers:")
-      for _ in range(n):
-            try:
-               arr.append(int(input()))
-            except ValueError:
-               print("Invalid input. Please enter valid integers.")
-               exit(1)
+        # Calculate and display the sum
+        total = calculate_sum(arr)
+        print("Sum of the numbers:", total)
 
-      total = calculate_sum(arr)
-
-      print("Sum of the numbers:", total)
-
-   except KeyboardInterrupt:
-      print("\nProgram terminated by user.")
-      exit(1)
+    except KeyboardInterrupt:
+        print("\nProgram terminated by user.")
 
 if __name__ == "__main__":
-   main()
+    main()
